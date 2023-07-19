@@ -23,6 +23,7 @@ const App = () => {
   const [selectedCharacter] = useState(null);
   const [story, setStory] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const buttonRef = useRef(null);
 
   const handleCharacterSelection = async (character) => {
@@ -32,6 +33,7 @@ const App = () => {
     const message = { role, content };
 
     try {
+      setIsLoading(true);
       const response = await sendMessageToChatGPT(message);
 
       if (
@@ -48,6 +50,8 @@ const App = () => {
     } catch (error) {
       console.error("Error fetching story:", error);
       setError("Error fetching story");
+    } finally {
+      setIsLoading(false); // Set loading state to false after API call is completed
     }
   };
 
@@ -93,6 +97,7 @@ const App = () => {
           </button>
         ))}
       </div>
+      {isLoading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {story && <div>{story}</div>}
     </div>
