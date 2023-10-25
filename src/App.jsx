@@ -2,20 +2,20 @@ import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
-const API_KEY = "844e657230b741b3ae77b4ff9bf22df4";
+// const API_KEY = process.env.REACT_APP_API_KEY;
 
 const CHARACTERS = [
   {
-    name: "Keruru",
+    name: "yellow-eyed penguin",
   },
   {
-    name: "Tui",
+    name: "Hector Dolphin",
   },
   {
-    name: "Pukeko",
+    name: "Paua shellfish",
   },
   {
-    name: "Weka",
+    name: "Blue Penguin",
   },
 ];
 
@@ -28,7 +28,7 @@ const App = () => {
 
   const handleCharacterSelection = async (character) => {
     const role = "system";
-    const content = `Create a kids story for a 3 years old kid about the ${character.name} bird. Say some real fact about this new zealand bird, and keep it at maximum 30 words. The story should be linked to the Tic Tac Toe Game`;
+    const content = `Create a kids story for a 3 years old kid about the ${character.name} sea animal. Say some real fact about this new zealand sea animal, and keep it at maximum 30 words`;
 
     const message = { role, content };
 
@@ -51,14 +51,14 @@ const App = () => {
       console.error("Error fetching story:", error);
       setError("Error fetching story");
     } finally {
-      setIsLoading(false); // Set loading state to false after API call is completed
+      setIsLoading(false);
     }
   };
 
   const sendMessageToChatGPT = async (message) => {
     try {
       const response = await fetch(
-        "https://te-wao-nui-story.openai.azure.com/openai/deployments/te-wao-nui-storyline/chat/completions?api-version=2023-03-15-preview",
+         "https://api.openai.com/v1/engines/davinci/completions",
         {
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ const App = () => {
 
   return (
     <div>
-      <h3>Kids-Friendly Stories about native birds and kaitiaki characters</h3>
+      <h3>Stories about native sea animals in New Zealand</h3>
       <div>
         {CHARACTERS.map((character) => (
           <button
