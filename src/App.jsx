@@ -2,14 +2,15 @@ import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
-// const API_KEY = process.env.REACT_APP_API_KEY;
 
 const CHARACTERS = [
   {
     name: "yellow-eyed penguin",
+    description: "The yellow-eyed penguin has yellow eyes"
   },
   {
     name: "Hector Dolphin",
+    descritpion: ""
   },
   {
     name: "Paua shellfish",
@@ -57,51 +58,55 @@ const App = () => {
 
   const sendMessageToChatGPT = async (message) => {
     try {
-      const response = await fetch(
-         "https://api.openai.com/v1/engines/davinci/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "api-key": API_KEY,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [message],
-          }),
-        }
-      );
-
+      const response = await fetch("/api/story", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+  
       const data = await response.json();
       console.log(data);
-
+  
       return data;
     } catch (error) {
-      throw new Error("Error sending message to ChatGPT");
+      throw new Error("Error");
     }
   };
+  
 
   useEffect(() => {}, [selectedCharacter]);
 
   return (
-    <div>
-      <h3>Stories about native sea animals in New Zealand</h3>
-      <div>
-        {CHARACTERS.map((character) => (
-          <button
-            ref={buttonRef}
-            key={character.name}
-            onClick={() => handleCharacterSelection(character)}
-          >
-            {character.name}
-          </button>
-        ))}
-      </div>
-      {isLoading && <div>Loading...</div>}
-      {error && <div>{error}</div>}
-      {story && <div>{story}</div>}
+    <div className="app">
+        <header className="header">
+            <h2>New Zealand Ocean Creatures</h2>
+            <h4>Meet Our Marine Mates and Their Watery Worlds</h4>
+        </header>
+        <main className="main">
+            <div className="button-container">
+                {CHARACTERS.map((character) => (
+                    <button
+                        className="character-button"
+                        ref={buttonRef}
+                        key={character.name}
+                        onClick={() => handleCharacterSelection(character)}
+                    >
+                        {character.name}
+                    </button>
+                ))}
+            </div>
+            {isLoading && <div>Loading...</div>}
+            {error && <div>{error}</div>}
+            {story && <div className="story">{story}</div>}
+        </main>
+        <footer className="footer">
+            <p>Discover the beauty of New Zealand's sea life.</p>
+        </footer>
     </div>
-  );
+);
+
 };
 
 export default App;
