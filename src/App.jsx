@@ -1,22 +1,29 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import MemoryGame from "./components/MemoryGame";
+import Footer from "./components/Footer";
 
-
-const CHARACTERS = [
+export const CHARACTERS = [
   {
     name: "yellow-eyed penguin",
-    description: "The yellow-eyed penguin has yellow eyes"
+    image:
+      "https://images.theconversation.com/files/405667/original/file-20210610-19-19zcvem.jpg?ixlib=rb-1.1.0&rect=0%2C0%2C4437%2C2955&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
   },
   {
     name: "Hector Dolphin",
-    descritpion: ""
+    image:
+      "https://missionblue.org/wp-content/uploads/2016/05/face-on-jump-4.jpg",
   },
   {
-    name: "Paua shellfish",
+    name: "Fur Seal",
+    image:
+      "https://www.doc.govt.nz/globalassets/images/nature/native-animals/marine-mammals/seals/nz-fur-seal/furseal-kclements-1200-12.jpg",
   },
   {
     name: "Blue Penguin",
+    image:
+      "https://nzbirdsonline.org.nz/sites/all/files/1200121BluePenguin1.jpg",
   },
 ];
 
@@ -25,6 +32,8 @@ const App = () => {
   const [story, setStory] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showMemoryGame, setShowMemoryGame] = useState(false);
+
   const buttonRef = useRef(null);
 
   const handleCharacterSelection = async (character) => {
@@ -65,48 +74,65 @@ const App = () => {
         },
         body: JSON.stringify({ message }),
       });
-  
+
       const data = await response.json();
       console.log(data);
-  
+
       return data;
     } catch (error) {
       throw new Error("Error");
     }
   };
-  
+
+  const handlePlayMemoryGame = () => {
+    setShowMemoryGame(true);
+  };
+
+  if (showMemoryGame) {
+    return <MemoryGame />;
+  }
 
   useEffect(() => {}, [selectedCharacter]);
 
   return (
     <div className="app">
-        <header className="header">
-            <h2>New Zealand Ocean Creatures</h2>
-            <h4>Meet Our Marine Mates and Their Watery Worlds</h4>
-        </header>
-        <main className="main">
-            <div className="button-container">
-                {CHARACTERS.map((character) => (
-                    <button
-                        className="character-button"
-                        ref={buttonRef}
-                        key={character.name}
-                        onClick={() => handleCharacterSelection(character)}
-                    >
-                        {character.name}
-                    </button>
-                ))}
-            </div>
-            {isLoading && <div>Loading...</div>}
-            {error && <div>{error}</div>}
-            {story && <div className="story">{story}</div>}
-        </main>
-        <footer className="footer">
-            <p>Discover the beauty of New Zealand's sea life.</p>
-        </footer>
-    </div>
-);
+      <header className="header">
+        <h2>New Zealand Ocean Creatures</h2>
+        <h4>Meet Our Marine Mates and Their Watery Worlds</h4>
+      </header>
+      <main className="main">
+        <div></div>
 
+        <div className="button-container">
+          {CHARACTERS.map((character) => (
+            <div className="character-card" key={character.name}>
+              <img
+                src={character.image}
+                alt={character.name}
+                className="character-image"
+              />
+              <button
+                className="character-button"
+                ref={buttonRef}
+                onClick={() => handleCharacterSelection(character)}
+              >
+                {character.name}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {isLoading && <div>Loading...</div>}
+        {error && <div>{error}</div>}
+        {story && <div className="story">{story}</div>}
+        <button className="play-button" onClick={handlePlayMemoryGame}>
+          Play memory card
+        </button>
+      </main>
+      {/* <MemoryGame /> */}
+      <Footer />
+    </div>
+  );
 };
 
 export default App;
