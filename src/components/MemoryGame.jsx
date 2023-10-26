@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card from './Card';
-import { CHARACTERS } from '../App';
+import { CHARACTERS } from '../utils/constants';
 
 // export default function MemoryGame() {
 //     const [flippedIndices, setFlippedIndices] = useState([]);
@@ -48,7 +48,7 @@ export default function MemoryGame() {
 
     return (
         <div className="display-cards">
-            
+
             {shuffledAnimals.map((animal, index) => (
                 <Card
                     key={index}
