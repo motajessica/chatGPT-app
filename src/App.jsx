@@ -19,8 +19,12 @@ const App = () => {
     setShowMemoryGame(true);
   };
 
+  // const handleBackToHome = () => {
+  //   setShowMemoryGame(false);
+  // };
+
   if (showMemoryGame) {
-    return <MemoryGame />;
+    return <MemoryGame  />;
   }
 
   return (

@@ -26,7 +26,12 @@ export default function MemoryGame() {
   const shuffledAnimals = shuffleArray(oceanAnimalsDouble);
 
   return (
+    <>
+    <div className="back-button">
+        <button>&larr; back</button>
+    </div>
     <div className="display-cards">
+    
       {shuffledAnimals.map((animal, index) => (
         <Card
           key={index}
@@ -36,5 +41,6 @@ export default function MemoryGame() {
         />
       ))}
     </div>
+    </>
   );
 }

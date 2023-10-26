@@ -2,12 +2,12 @@ import React from 'react';
 
 function Card({ image, isFlipped, onClick }) {
     const cardStyle = {
-        width: '100px',
-        height: '100px',
+        width: '150px',
+        height: '150px',
         background: isFlipped ? `url(${image})` : 'purple',
         cursor: 'pointer',
         backgroundSize: 'cover',
-        margin: '50px'
+        margin: '40px'
     };
 
     return (
