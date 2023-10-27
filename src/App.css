@@ -17,7 +17,7 @@
 
 .header {
   background-color: #0288d1; 
-  color: #000000;
+  color: White;
   padding: 20px 0;
   text-align: center;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
@@ -100,9 +100,10 @@
 }
 
 .footer {
-  background-color: #0288d1; /* Oceanic blue */
+  background-color: #0288d1; 
   padding: 10px 0;
   text-align: center;
   box-shadow: 0 -3px 6px rgba(0,0,0,0.1);
+  color: white;
 }
 
