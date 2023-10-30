@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import Card from "./Card";
 import { CHARACTERS } from "../utils/constants";
 
-export default function MemoryGame() {
+export default function MemoryGame({ onBack }) {
   const [flippedIndices, setFlippedIndices] = useState([]);
+
+  const handleBackButtonClick = () => {
+    console.log("Back button clicked in MemoryGame");
+    onBack();
+};
 
   const handleCardClick = (index) => {
     setFlippedIndices((prevState) => [...prevState, index]);
@@ -28,7 +33,7 @@ export default function MemoryGame() {
   return (
     <>
     <div className="back-button">
-        <button>&larr; back</button>
+        <button onClick={handleBackButtonClick}>&larr; back</button>
     </div>
     <div className="display-cards">
     

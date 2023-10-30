@@ -19,12 +19,14 @@ const App = () => {
     setShowMemoryGame(true);
   };
 
-  // const handleBackToHome = () => {
-  //   setShowMemoryGame(false);
-  // };
+  const handleBackToHome = () => {
+    console.log("handleBackToHome triggered");
+    setShowMemoryGame(false);
+  };
+
 
   if (showMemoryGame) {
-    return <MemoryGame  />;
+    return <MemoryGame onBack={handleBackToHome} />;
   }
 
   return (
@@ -33,6 +35,11 @@ const App = () => {
         <h2>New Zealand Ocean Creatures</h2>
         <h4>Meet Our Marine Mates and Their Watery Worlds</h4>
       </header>
+      
+       {showMemoryGame ? (
+      <MemoryGame onBack={handleBackToHome} />
+    ) : (
+
       <main className="main">
         <div className="button-container">
           {CHARACTERS.map((character) => (
@@ -58,6 +65,10 @@ const App = () => {
           Play memory card
         </button>
       </main>
+
+    )}
+      
+      
       <Footer />
     </div>
   );

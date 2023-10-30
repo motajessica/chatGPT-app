@@ -6,8 +6,10 @@ function Card({ image, isFlipped, onClick }) {
         height: '150px',
         background: isFlipped ? `url(${image})` : 'purple',
         cursor: 'pointer',
-        backgroundSize: 'cover',
-        margin: '40px'
+        backgroundSize: 'contain',
+        margin: '40px',
+        
+        
     };
 
     return (
