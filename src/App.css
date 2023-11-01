@@ -1,20 +1,18 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: fit-content;
+  /* margin: 0 auto; */
+  /* padding:2rem; */
   text-align: center;
 
 }
 
 .app {
   font-family: 'Arial', sans-serif;
-  background-color: #e0f7fa; 
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
 }
-
 .header {
   background-color: #0288d1; 
   color: White;
@@ -72,7 +70,6 @@
 }
 
 .story {
-  width: 60%;
   text-align: center;
   background-color: #ffffff; 
   padding: 15px;
@@ -94,16 +91,18 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  margin: 50px;
   align-items: center;
   text-align: center;
-  
+  justify-content: center; 
 }
+
 
 .back-button{
   display: flex;
-  background-color: white;
-  color: #0288d1;
+  flex-direction: row;
+  align-items: start;
+  margin: 0 30px;
+  outline-color: #0288d1;
 }
 
 .footer {

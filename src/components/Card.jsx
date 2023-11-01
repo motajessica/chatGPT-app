@@ -4,7 +4,7 @@ function Card({ image, isFlipped, onClick }) {
     const cardStyle = {
         width: '200px',
         height: '150px',
-        background: isFlipped ? `url(${image})` : 'purple',
+        background: isFlipped ? `url(${image})` : '#0288d1',
         cursor: 'pointer' ,
         margin: '40px',
     };
