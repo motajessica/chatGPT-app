@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import MemoryGame from "./components/MemoryGame";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
+import MemoryGame from "./components/MemoryGame";
 import { CHARACTERS } from "./utils/constants";
 import GeneratedText from "./components/GeneratedText";
+
 
 
 const App = () => {
@@ -31,10 +33,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <header className="header">
-        <h2>New Zealand Ocean Creatures</h2>
-        <h4>Meet Our Marine Mates and Their Watery Worlds</h4>
-      </header>
+      <Header/>
       
        {showMemoryGame ? (
       <MemoryGame onBack={handleBackToHome} />
