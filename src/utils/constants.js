@@ -60,3 +60,8 @@ export const CHARACTERS = [
       "https://www.fishing.net.nz/default/assets/Image/2019/nz-shellfish-7.jpg",
   },
 ];
+
+
+export const TITLE = "Aotearoa Sea Life"
+
+export const SUBTITLE = "Meet our Marine Mates and Their Watery Worlds"
