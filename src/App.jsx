@@ -10,11 +10,11 @@ import GeneratedText from "./components/GeneratedText";
 
 
 const App = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState(null); // Note the addition of setSelectedCharacter
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [showMemoryGame, setShowMemoryGame] = useState(false);
 
   const handleCharacterButton = (character) => {
-    setSelectedCharacter(character);
+    setSelectedCharacter(selectedCharacter === character ? null : character);
   };
 
   const handlePlayMemoryGame = () => {
@@ -24,8 +24,8 @@ const App = () => {
   const handleBackToHome = () => {
     console.log("handleBackToHome triggered");
     setShowMemoryGame(false);
+    setSelectedCharacter(null)
   };
-
 
   if (showMemoryGame) {
     return <MemoryGame onBack={handleBackToHome} />;
@@ -33,40 +33,58 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header/>
+      <Header />
       
-       {showMemoryGame ? (
-      <MemoryGame onBack={handleBackToHome} />
-    ) : (
-
       <main className="main">
-        <div className="button-container">
-          {CHARACTERS.map((character) => (
-            <div className="character-card" key={character.name}>
-              <img
-                src={character.image}
-                alt={character.name}
-                className="character-image"
-              />
-              <button
-                className="character-button"
-                onClick={() => handleCharacterButton(character)}
-              >
-                {character.name}
-              </button>
+        {showMemoryGame ? (
+          <MemoryGame onBack={handleBackToHome} />
+        ) : (
+          <>
+            <div className="button-container">
+              {selectedCharacter === null ? (
+                CHARACTERS.map((character) => (
+                  <div className="character-card" key={character.name}>
+                    <img
+                      src={character.image}
+                      alt={character.name}
+                      className="character-image"
+                    />
+                    <button
+                      className="character-button"
+                      onClick={() => handleCharacterButton(character)}
+                    >
+                      {character.name}
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div className="character-card character-card-selected" key={selectedCharacter.name}>
+                  <img
+                    src={selectedCharacter.image}
+                    alt={selectedCharacter.name}
+                    className="character-image"
+                  />
+                  <div>{selectedCharacter.name}</div>
+                  <button
+                    className="character-button"
+                    onClick={() => setSelectedCharacter(null)} 
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
 
-        <GeneratedText character={selectedCharacter} />
+            {selectedCharacter && <GeneratedText character={selectedCharacter} />}
 
-        <button className="play-button" onClick={handlePlayMemoryGame}>
-          Play memory card
-        </button>
+            {!selectedCharacter && (
+              <button className="play-button" onClick={handlePlayMemoryGame}>
+                Play memory card
+              </button>
+            )}
+          </>
+        )}
       </main>
-
-    )}
-      
       
       <Footer />
     </div>

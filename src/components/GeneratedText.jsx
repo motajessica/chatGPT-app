@@ -55,7 +55,6 @@ const GeneratedText = ({ character }) => {
     }
   };
 
-  // Use the effect hook to trigger the GPT request when a character is selected
   React.useEffect(() => {
     if(character) {
       handleCharacterSelection(character);
