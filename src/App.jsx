@@ -7,8 +7,6 @@ import MemoryGame from "./components/MemoryGame";
 import { CHARACTERS } from "./utils/constants";
 import GeneratedText from "./components/GeneratedText";
 
-
-
 const App = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [showMemoryGame, setShowMemoryGame] = useState(false);
@@ -24,7 +22,7 @@ const App = () => {
   const handleBackToHome = () => {
     console.log("handleBackToHome triggered");
     setShowMemoryGame(false);
-    setSelectedCharacter(null)
+    setSelectedCharacter(null);
   };
 
   if (showMemoryGame) {
@@ -34,7 +32,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      
+
       <main className="main">
         {showMemoryGame ? (
           <MemoryGame onBack={handleBackToHome} />
@@ -58,7 +56,10 @@ const App = () => {
                   </div>
                 ))
               ) : (
-                <div className="character-card character-card-selected" key={selectedCharacter.name}>
+                <div
+                  className="character-card character-card-selected"
+                  key={selectedCharacter.name}
+                >
                   <img
                     src={selectedCharacter.image}
                     alt={selectedCharacter.name}
@@ -67,7 +68,7 @@ const App = () => {
                   <div>{selectedCharacter.name}</div>
                   <button
                     className="character-button"
-                    onClick={() => setSelectedCharacter(null)} 
+                    onClick={() => setSelectedCharacter(null)}
                   >
                     Close
                   </button>
@@ -75,7 +76,9 @@ const App = () => {
               )}
             </div>
 
-            {selectedCharacter && <GeneratedText character={selectedCharacter} />}
+            {selectedCharacter && (
+              <GeneratedText character={selectedCharacter} />
+            )}
 
             {!selectedCharacter && (
               <button className="play-button" onClick={handlePlayMemoryGame}>
@@ -85,11 +88,10 @@ const App = () => {
           </>
         )}
       </main>
-      
+
       <Footer />
     </div>
   );
 };
 
 export default App;
-

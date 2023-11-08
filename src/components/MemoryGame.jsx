@@ -8,11 +8,29 @@ export default function MemoryGame({ onBack }) {
   const [foundPairs, setFoundPairs] = useState([]);
   const [hasWon, setHasWon] = useState(false);
 
+  // useEffect(() => {
+  //   const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+  //   const oceanAnimalsDouble = [...CHARACTERS, ...CHARACTERS];
+  //   setShuffledAnimals(shuffleArray(oceanAnimalsDouble));
+  // }, []);
+
   useEffect(() => {
+    const selectRandomCharacters = (array, num) => {
+      const shuffled = [...array].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, num);
+    };
+  
     const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
-    const oceanAnimalsDouble = [...CHARACTERS, ...CHARACTERS];
-    setShuffledAnimals(shuffleArray(oceanAnimalsDouble));
+  
+    const selectedCharacters = selectRandomCharacters(CHARACTERS, 4);
+    const oceanAnimalsDouble = [...selectedCharacters, ...selectedCharacters];
+  
+    const shuffledPairs = shuffleArray(oceanAnimalsDouble);
+  
+    setShuffledAnimals(shuffledPairs);
   }, []);
+
+
 
   const handleBackButtonClick = () => {
     console.log("Back button clicked in MemoryGame");
@@ -55,6 +73,7 @@ export default function MemoryGame({ onBack }) {
       <div className="back-button">
         <button onClick={handleBackButtonClick}>&larr; back</button>
       </div>
+      <h2 className="">Sea Creatures Memory Card Game</h2>
       {hasWon ? (
         <div>You Win!</div>
         
