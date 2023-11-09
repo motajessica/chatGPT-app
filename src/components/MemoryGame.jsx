@@ -53,9 +53,10 @@ export default function MemoryGame({ onBack }) {
           setFoundPairs((prev) => {
             const newPairs = [...prev, shuffledAnimals[firstIndex].name];
 
-            if (newPairs.length === CHARACTERS.length) {
+            if (newPairs.length === shuffledAnimals.length / 2) {
               setHasWon(true);
             }
+            
             return newPairs;
           });
           setFlippedIndices([]);
